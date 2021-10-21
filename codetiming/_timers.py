@@ -32,6 +32,9 @@ class Timers(UserDict):
         self.data.clear()
         self._timings.clear()
 
+    def reset(self, name) -> None:
+        self.data[name] = 0
+
     def __setitem__(self, name: str, value: float) -> None:
         """Disallow setting of timer values"""
         raise TypeError(

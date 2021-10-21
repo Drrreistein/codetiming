@@ -58,11 +58,17 @@ class Timer(ContextDecorator):
                     "minutes": self.last / 60,
                 }
                 text = self.text.format(self.last, **attributes)
-            self.logger(text)
+            if not text=='':
+                self.logger(text)
         if self.name:
             self.timers.add(self.name, self.last)
 
         return self.last
+
+    def reset(self) -> None:
+        """ reset timer counting as 0
+        """
+        self.timers.reset(self.name)
 
     def __enter__(self) -> "Timer":
         """Start a new timer as a context manager"""
